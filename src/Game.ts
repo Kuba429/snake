@@ -16,9 +16,9 @@ export default class GameData {
             ctx?.moveTo(this.cellSize * i, 0);
             ctx?.lineTo(this.cellSize * i, this.canvasWidth);
 
-            ctx?.moveTo(0,this.cellSize * i);
-            ctx?.lineTo( this.canvasWidth,this.cellSize * i);
-
+            ctx?.moveTo(0, this.cellSize * i);
+            ctx?.lineTo(this.canvasWidth, this.cellSize * i);
         }
+        ctx?.stroke();
     }
 }
