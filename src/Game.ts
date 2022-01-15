@@ -26,6 +26,7 @@ export default class GameData {
         requestAnimationFrame(game.getNextFrame);
     }
     executeFrame() {
+        this.clearCanvas()
         p1.move();
     }
 
@@ -39,6 +40,10 @@ export default class GameData {
             ctx?.lineTo(this.canvasWidth, this.cellSize * i);
         }
         ctx?.stroke();
+    }
+    clearCanvas() {
+        ctx?.clearRect(0, 0, this.canvasWidth, this.canvasWidth);
+        this.drawGrid()
     }
     getTime() {
         return new Date().getTime();
