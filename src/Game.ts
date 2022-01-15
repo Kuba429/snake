@@ -1,5 +1,5 @@
 import { ctx, game, p1 } from "./main";
-export default class GameData {
+export default class Game {
     canvasWidth: number;
     gridSize: number;
     cellSize: number;
