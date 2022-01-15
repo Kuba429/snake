@@ -9,6 +9,8 @@ export default class Player {
     size: number;
     x: number;
     y: number;
+    ready: boolean;
+    queue: string;
     tail: block[];
     constructor() {
         this.color = "#FF5858";
@@ -17,6 +19,8 @@ export default class Player {
         const middle = Math.floor(game.gridSize / 2) * this.size;
         this.x = middle;
         this.y = middle;
+        this.ready = true;
+        this.queue = this.direction;
         this.tail = [
             { x: this.x, y: this.y },
             { x: this.x, y: this.y },
@@ -26,6 +30,8 @@ export default class Player {
         const middle = Math.floor(game.gridSize / 2) * this.size;
         this.x = middle;
         this.y = middle;
+        this.ready = true;
+
         this.tail = [
             { x: this.x, y: this.y },
             { x: this.x, y: this.y },
@@ -39,6 +45,7 @@ export default class Player {
             this.tail[i] = { ...this.tail[i + 1] };
         }
         // head
+
         switch (this.direction) {
             case "up":
                 this.y -= this.size;
@@ -67,8 +74,60 @@ export default class Player {
             this.y = limit;
         }
 
+        if (getOpposite(this.queue) != this.direction) {
+            this.direction = this.queue;
+        }
+        this.ready = true;
         this.draw();
         this.detectCollision();
+    }
+    addListeners() {
+        addEventListener("keydown", (e) => {
+            switch (e.code) {
+                case "ArrowLeft":
+                    if (this.direction != "right" && this.ready) {
+                        this.direction = "left";
+                    }
+                    this.queue = "left";
+
+                    this.ready = false;
+                    break;
+                case "ArrowRight":
+                    if (this.direction != "left" && this.ready) {
+                        this.direction = "right";
+                    }
+                    this.queue = "right";
+
+                    this.ready = false;
+
+                    break;
+                case "ArrowUp":
+                    if (this.direction != "down" && this.ready) {
+                        this.direction = "up";
+                    }
+                    this.queue = "up";
+
+                    this.ready = false;
+                    break;
+                case "ArrowDown":
+                    if (this.direction != "up" && this.ready) {
+                        this.direction = "down";
+                    }
+                    this.queue = "down";
+
+                    this.ready = false;
+
+                    break;
+                case "Space":
+                    this.addToTail();
+                    break;
+                case "Enter":
+                    console.table(this.tail);
+                    break;
+                default:
+                    break;
+            }
+        });
     }
     detectCollision() {
         const headPosition: string = JSON.stringify({ x: this.x, y: this.y });
@@ -114,30 +173,26 @@ export default class Player {
             ctx?.stroke();
         });
     }
-    addListeners() {
-        addEventListener("keydown", (e) => {
-            switch (e.code) {
-                case "ArrowLeft":
-                    this.direction = "left";
-                    break;
-                case "ArrowRight":
-                    this.direction = "right";
-                    break;
-                case "ArrowUp":
-                    this.direction = "up";
-                    break;
-                case "ArrowDown":
-                    this.direction = "down";
-                    break;
-                case "Space":
-                    this.addToTail();
-                    break;
-                case "Enter":
-                    console.table(this.tail);
-                    break;
-                default:
-                    break;
-            }
-        });
-    }
 }
+
+const getOpposite = (direction: string) => {
+    let toReturn = undefined;
+    switch (direction) {
+        case "up":
+            toReturn = "down";
+            break;
+        case "down":
+            toReturn = "up";
+            break;
+        case "left":
+            toReturn = "right";
+            break;
+        case "right":
+            toReturn = "left";
+            break;
+        default:
+            break;
+    }
+
+    return toReturn;
+};
