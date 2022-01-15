@@ -47,7 +47,7 @@ export default class Player {
                 this.y += this.size;
                 break;
             case "right":
-                this.x += game.cellSize;
+                this.x += this.size;
                 break;
             case "left":
                 this.x -= this.size;
