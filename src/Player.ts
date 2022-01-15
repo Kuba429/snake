@@ -1,18 +1,24 @@
-import { ctx, gameData } from "./main";
+import { ctx, game } from "./main";
 export default class Player {
     color: string;
     vel: number;
+    direction: string;
     size: number;
     x: number;
     y: number;
-    constructor(size: number) {
+    constructor() {
         this.color = "#FF5858";
         this.vel = 1;
-        this.size = size;
-        this.x = Math.floor(gameData.gridSize / 2) * this.size;
-        this.y = Math.floor(gameData.gridSize / 2) * this.size;
+        this.direction = "right";
+        this.size = game.cellSize;
+        const middle = Math.floor(game.gridSize / 2) * this.size;
+        this.x = middle;
+        this.y = middle;
     }
-    spawn() {
+    move() {
+        console.log("move");
+    }
+    draw() {
         ctx!.strokeStyle = this.color;
         ctx?.beginPath();
         const rectCords: [number, number, number, number] = [

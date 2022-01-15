@@ -3,12 +3,14 @@ import GameData from "./Game";
 import Player from "./Player";
 const gameCanvas = <HTMLCanvasElement>document.getElementById("game-canvas");
 export const ctx = gameCanvas.getContext("2d");
-export const gameData = new GameData(gameCanvas.width);
-export const p1 = new Player(gameData.cellSize);
+export const game = new GameData(gameCanvas.width);
+export const p1 = new Player();
 
 const init = () => {
-    gameData.drawGrid();
-    p1.spawn()
+    game.drawGrid();
+    p1.draw();
+
+    requestAnimationFrame(game.getNextFrame);
 };
 
 init();
