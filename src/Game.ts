@@ -31,7 +31,7 @@ export default class GameData {
     }
     over(){
         alert('game over')
-        
+        p1.setDefaults()
     }
     drawGrid() {
         ctx!.strokeStyle = "#61234E";

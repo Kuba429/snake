@@ -12,8 +12,17 @@ export default class Player {
     tail: block[];
     constructor() {
         this.color = "#FF5858";
-        this.direction = "down";
+        this.direction = "right";
         this.size = game.cellSize;
+        const middle = Math.floor(game.gridSize / 2) * this.size;
+        this.x = middle;
+        this.y = middle;
+        this.tail = [
+            { x: this.x, y: this.y },
+            { x: this.x, y: this.y },
+        ];
+    }
+    setDefaults() {
         const middle = Math.floor(game.gridSize / 2) * this.size;
         this.x = middle;
         this.y = middle;
