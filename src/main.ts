@@ -9,7 +9,7 @@ export const p1 = new Player();
 const init = () => {
     game.drawGrid();
     p1.draw();
-    p1.addListeners()
+    p1.addListeners();
     requestAnimationFrame(game.getNextFrame);
 };
 

@@ -10,7 +10,7 @@ export default class GameData {
         this.canvasWidth = canvasWidth;
         this.gridSize = 30;
         this.cellSize = canvasWidth / this.gridSize;
-        this.fps = 1.27;
+        this.fps = 7;
         this.loopNow = this.getTime();
         this.loopThen = this.getTime();
     }
@@ -29,7 +29,10 @@ export default class GameData {
         this.clearCanvas()
         p1.move();
     }
-
+    over(){
+        alert('game over')
+        
+    }
     drawGrid() {
         ctx!.strokeStyle = "#61234E";
         for (let i = 1; i < this.gridSize; i++) {
