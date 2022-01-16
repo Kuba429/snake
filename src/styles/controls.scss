@@ -18,26 +18,26 @@
             width: 100%;
             color: #ff5858;
         }
-        &.up {
+        &.ArrowUp {
             grid-row: 1;
             grid-column: 2;
             svg {
                 transform: rotate(270deg);
             }
         }
-        &.left {
+        &.ArrowLeft {
             grid-column: 1;
             svg {
                 transform: rotate(180deg);
             }
         }
-        &.down {
+        &.ArrowDown {
             grid-column: 2;
             svg {
                 transform: rotate(90deg);
             }
         }
-        &.right {
+        &.ArrowRight {
             grid-column: 3;
             svg {
                 transform: rotate(0deg);

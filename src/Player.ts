@@ -14,7 +14,7 @@ export default class Player {
     tail: block[];
     constructor() {
         this.color = "#FF5858";
-        this.direction = "right";
+        this.direction = "ArrowRight";
         this.size = game.cellSize;
         const middle = Math.floor(game.gridSize / 2) * this.size;
         this.x = middle;
@@ -47,16 +47,16 @@ export default class Player {
         // head
 
         switch (this.direction) {
-            case "up":
+            case "ArrowUp":
                 this.y -= this.size;
                 break;
-            case "down":
+            case "ArrowDown":
                 this.y += this.size;
                 break;
-            case "right":
+            case "ArrowRight":
                 this.x += this.size;
                 break;
-            case "left":
+            case "ArrowLeft":
                 this.x -= this.size;
                 break;
             default:
@@ -82,51 +82,26 @@ export default class Player {
         this.detectCollision();
     }
     addListeners() {
+        const arrows = document.querySelectorAll<HTMLElement>(".arrow");
+        arrows.forEach((arrow) => {
+            arrow.addEventListener("click", () => {
+                const arrowDirection: string = arrow.dataset.direction!;
+                if (
+                    this.direction != getOpposite(arrowDirection!) &&
+                    this.ready
+                ) {
+                    this.direction = arrowDirection;
+                }
+                this.queue = arrowDirection;
+                this.ready = false;
+            });
+        });
+
         addEventListener("keydown", (e) => {
-            switch (e.code) {
-                case "ArrowLeft":
-                    if (this.direction != "right" && this.ready) {
-                        this.direction = "left";
-                    }
-                    this.queue = "left";
-
-                    this.ready = false;
-                    break;
-                case "ArrowRight":
-                    if (this.direction != "left" && this.ready) {
-                        this.direction = "right";
-                    }
-                    this.queue = "right";
-
-                    this.ready = false;
-
-                    break;
-                case "ArrowUp":
-                    if (this.direction != "down" && this.ready) {
-                        this.direction = "up";
-                    }
-                    this.queue = "up";
-
-                    this.ready = false;
-                    break;
-                case "ArrowDown":
-                    if (this.direction != "up" && this.ready) {
-                        this.direction = "down";
-                    }
-                    this.queue = "down";
-
-                    this.ready = false;
-
-                    break;
-                case "Space":
-                    this.addToTail();
-                    break;
-                case "Enter":
-                    food.getNewPosition();
-                    break;
-                default:
-                    break;
-            }
+            const element: HTMLElement = document.querySelector(
+                `.arrow.${e.code}`
+            )!;
+            element && element.click();
         });
     }
     detectCollision() {
@@ -146,7 +121,6 @@ export default class Player {
                 y: this.y,
             });
         } else {
-            // let lastBlock = this.tail[this.tail.length - 1];
             let lastBlock = this.tail[this.tail.length - 1];
             this.tail.unshift({ ...lastBlock });
         }
@@ -183,17 +157,17 @@ export default class Player {
 const getOpposite = (direction: string) => {
     let toReturn: string = undefined!;
     switch (direction) {
-        case "up":
-            toReturn = "down";
+        case "ArrowUp":
+            toReturn = "ArrowDown";
             break;
-        case "down":
-            toReturn = "up";
+        case "ArrowDown":
+            toReturn = "ArrowUp";
             break;
-        case "left":
-            toReturn = "right";
+        case "ArrowLeft":
+            toReturn = "ArrowRight";
             break;
-        case "right":
-            toReturn = "left";
+        case "ArrowRight":
+            toReturn = "ArrowLeft";
             break;
         default:
             break;
