@@ -49,13 +49,14 @@
 }
 
 .arrow {
-    box-shadow: 0px 4px 0px 1px #ff5858;
+    $shadow-color: #ff5858;
+    box-shadow: 0px 4px 0px 1px $shadow-color;
     transition: ease all 0.05s;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 
     &:active {
         transform: translateY(4px);
-        box-shadow: 0px 1px 0px 1px #ff5858;
+        box-shadow: 0px 1px 0px 1px $shadow-color;
         outline: none;
     }
 }
