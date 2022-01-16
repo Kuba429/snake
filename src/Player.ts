@@ -2,7 +2,7 @@ interface block {
     x: number;
     y: number;
 }
-import { ctx, game } from "./main";
+import { ctx, food, game } from "./main";
 export default class Player {
     color: string;
     direction: string;
@@ -122,7 +122,7 @@ export default class Player {
                     this.addToTail();
                     break;
                 case "Enter":
-                    console.table(this.tail);
+                    food.getNewPosition();
                     break;
                 default:
                     break;
@@ -131,8 +131,12 @@ export default class Player {
     }
     detectCollision() {
         const headPosition: string = JSON.stringify({ x: this.x, y: this.y });
+        const foodPosition: string = JSON.stringify({ x: food.x, y: food.y });
+        if (headPosition == foodPosition) food.getEaten();
         this.tail.forEach((block: object) => {
             if (JSON.stringify(block) == headPosition) game.over();
+            else if (JSON.stringify(block) == foodPosition)
+                food.getNewPosition();
         });
     }
     addToTail() {
@@ -148,6 +152,7 @@ export default class Player {
         }
     }
     draw() {
+        ctx!.fillStyle = "#000000";
         //head
         ctx!.strokeStyle = this.color;
         ctx?.beginPath();
@@ -176,7 +181,7 @@ export default class Player {
 }
 
 const getOpposite = (direction: string) => {
-    let toReturn = undefined;
+    let toReturn: string = undefined!;
     switch (direction) {
         case "up":
             toReturn = "down";

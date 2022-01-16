@@ -1,4 +1,4 @@
-import { ctx, game, p1 } from "./main";
+import { ctx, food, game, p1 } from "./main";
 export default class Game {
     canvasWidth: number;
     gridSize: number;
@@ -6,11 +6,13 @@ export default class Game {
     fps: number;
     loopNow: number;
     loopThen: number;
+    score: number;
     constructor(canvasWidth: number) {
         this.canvasWidth = canvasWidth;
         this.gridSize = 30;
         this.cellSize = canvasWidth / this.gridSize;
         this.fps = 7;
+        this.score = 0;
         this.loopNow = this.getTime();
         this.loopThen = this.getTime();
     }
@@ -26,12 +28,13 @@ export default class Game {
         requestAnimationFrame(game.getNextFrame);
     }
     executeFrame() {
-        this.clearCanvas()
+        this.clearCanvas();
         p1.move();
     }
-    over(){
-        alert('game over')
-        p1.setDefaults()
+    over() {
+        alert(`Game over. Score: ${this.score}`);
+        this.score = 0;
+        p1.setDefaults();
     }
     drawGrid() {
         ctx!.strokeStyle = "#61234E";
@@ -46,7 +49,8 @@ export default class Game {
     }
     clearCanvas() {
         ctx?.clearRect(0, 0, this.canvasWidth, this.canvasWidth);
-        this.drawGrid()
+        this.drawGrid();
+        food.draw();
     }
     getTime() {
         return new Date().getTime();
