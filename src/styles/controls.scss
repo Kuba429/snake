@@ -12,7 +12,9 @@
         border: none;
         border-radius: 4px;
         padding: 5px;
+
         cursor: pointer;
+
         svg {
             height: 100%;
             width: 100%;
@@ -49,8 +51,11 @@
 .arrow {
     box-shadow: 0px 4px 0px 1px #ff5858;
     transition: ease all 0.05s;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
     &:active {
         transform: translateY(4px);
         box-shadow: 0px 1px 0px 1px #ff5858;
+        outline: none;
     }
 }

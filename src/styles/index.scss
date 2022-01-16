@@ -1,25 +1,40 @@
-@import "variables.scss";
 @import "controls.scss";
 html,
 body {
     margin: 0;
     padding: 0;
     height: 100%;
+    background-color: #032535;
 }
-
+h3 {
+    color: white;
+    font-size: 3rem;
+    padding: 0 40px;
+    text-align: center;
+    line-height: 5rem;
+    margin: 0px;
+    font-family: "Press Start 2P", cursive;
+    text-shadow: 5px 0px 0px #ff5858, -5px 0px 0px #ff5858, 0px 5px 0px #ff5858,
+        0px -5px 0px #ff5858, -5px -5px 0px #ff5858, 5px 5px 0px #ff5858,
+        -5px 5px 0px #ff5858, 5px -5px 0px #ff5858;
+}
 #app {
     display: flex;
-    gap:1rem;
+    gap: 1rem;
+    margin: auto;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 100%;
     width: 100%;
-    background-color: #032535;
+    background-color: inherit;
 }
 
 #game-canvas {
     max-width: 98%;
+    max-height: 98%;
+    // height:auto;
+    // width:auto;
     box-sizing: border-box;
     background: #032535;
     border: #ff5858 1px solid;

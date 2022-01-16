@@ -36,6 +36,10 @@ export default class Game {
         this.score = 0;
         p1.setDefaults();
     }
+    updateScore() {
+        const scoreElement: Element = document.querySelector(".score")!;
+        scoreElement.textContent = this.score.toString();
+    }
     drawGrid() {
         ctx!.strokeStyle = "#61234E";
         for (let i = 1; i < this.gridSize; i++) {

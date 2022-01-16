@@ -13,6 +13,7 @@ const init = () => {
     game.drawGrid();
     p1.draw();
     p1.addListeners();
+    game.updateScore()
     requestAnimationFrame(game.getNextFrame);
 };
 

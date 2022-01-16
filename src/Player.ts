@@ -25,18 +25,20 @@ export default class Player {
             { x: this.x, y: this.y },
             { x: this.x, y: this.y },
         ];
+
     }
     setDefaults() {
+        game.updateScore()
         const middle = Math.floor(game.gridSize / 2) * this.size;
         this.x = middle;
         this.y = middle;
         this.ready = true;
-
         this.tail = [
             { x: this.x, y: this.y },
             { x: this.x, y: this.y },
         ];
     }
+    
     move() {
         // tail
         this.tail[this.tail.length - 1].x = this.x;

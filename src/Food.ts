@@ -13,6 +13,7 @@ export default class Food {
 
     getEaten() {
         game.score++;
+        game.updateScore()
         this.getNewPosition();
         p1.addToTail();
     }
