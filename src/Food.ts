@@ -8,6 +8,7 @@ export default class Food {
         this.x = 20;
         this.y = 20;
         this.size = p1.size;
+        this.getNewPosition()
     }
 
     getEaten() {

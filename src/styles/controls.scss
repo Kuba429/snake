@@ -1,0 +1,45 @@
+.controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 4px;
+
+    button {
+        height: 3rem;
+        width:4rem;
+        grid-row: 2;
+        background: white;
+        padding:5px;
+        
+        svg {
+            height: 100%;
+            width: 100%;
+            color: blue;
+        }
+        &.up {
+            grid-row: 1;
+            grid-column: 2;
+            svg {
+                transform: rotate(270deg);
+            }
+        }
+        &.left {
+            grid-column: 1;
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+        &.down {
+            grid-column: 2;
+            svg {
+                transform: rotate(90deg);
+            }
+        }
+        &.right {
+            grid-column: 3;
+            svg {
+                transform: rotate(0deg);
+            }
+        }
+    }
+}
