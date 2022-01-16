@@ -2,19 +2,21 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 4px;
+    gap: 10px;
 
-    button {
+    .arrow {
         height: 3rem;
-        width:4rem;
+        width: 4rem;
         grid-row: 2;
-        background: white;
-        padding:5px;
-        
+        background: #61234e;
+        border: none;
+        border-radius: 4px;
+        padding: 5px;
+        cursor: pointer;
         svg {
             height: 100%;
             width: 100%;
-            color: blue;
+            color: #ff5858;
         }
         &.up {
             grid-row: 1;
@@ -41,5 +43,14 @@
                 transform: rotate(0deg);
             }
         }
+    }
+}
+
+.arrow {
+    box-shadow: 0px 4px 0px 1px #ff5858;
+    transition: ease all 0.05s;
+    &:active {
+        transform: translateY(4px);
+        box-shadow: 0px 1px 0px 1px #ff5858;
     }
 }
