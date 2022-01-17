@@ -8,13 +8,34 @@ export const ctx = gameCanvas.getContext("2d");
 export const game = new Game(gameCanvas.width);
 export const p1 = new Player();
 export const food = new Food();
+
+const fullscreenButton: Element = document.querySelector(".fullscreen")!;
+
+
 const init = () => {
-    convertImages('img')
+    convertImages("img");
+    fullscreenButton.addEventListener("click", fullscreenToggle());
     game.drawGrid();
     p1.draw();
     p1.addListeners();
-    game.updateScore()
+    game.updateScore();
     requestAnimationFrame(game.getNextFrame);
 };
+
+const fullscreenToggle = () => {
+    let isFullscreen = false;
+    return () => {
+        console.log(isFullscreen)
+        if (isFullscreen) {
+            document.exitFullscreen();
+            isFullscreen = false;
+        } else {
+            document.documentElement.requestFullscreen();
+            isFullscreen = true;
+        }
+    };
+};
+
+
 
 init();
