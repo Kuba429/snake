@@ -11,10 +11,9 @@ export const food = new Food();
 
 const fullscreenButton: Element = document.querySelector(".fullscreen")!;
 
-
 const init = () => {
     convertImages("img");
-    fullscreenButton.addEventListener("click", fullscreenToggle());
+    fullscreenButton.addEventListener("click", fullscreenToggle);
     game.drawGrid();
     p1.draw();
     p1.addListeners();
@@ -23,19 +22,11 @@ const init = () => {
 };
 
 const fullscreenToggle = () => {
-    let isFullscreen = false;
-    return () => {
-        console.log(isFullscreen)
-        if (isFullscreen) {
-            document.exitFullscreen();
-            isFullscreen = false;
-        } else {
-            document.documentElement.requestFullscreen();
-            isFullscreen = true;
-        }
-    };
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        document.documentElement.requestFullscreen();
+    }
 };
-
-
 
 init();
