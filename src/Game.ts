@@ -3,6 +3,7 @@ export default class Game {
     canvasWidth: number;
     gridSize: number;
     cellSize: number;
+    initialFps: number;
     fps: number;
     loopNow: number;
     loopThen: number;
@@ -11,7 +12,8 @@ export default class Game {
         this.canvasWidth = canvasWidth;
         this.gridSize = 30;
         this.cellSize = canvasWidth / this.gridSize;
-        this.fps = 7;
+        this.initialFps = 7;
+        this.fps = this.initialFps;
         this.score = 0;
         this.loopNow = this.getTime();
         this.loopThen = this.getTime();
@@ -34,11 +36,16 @@ export default class Game {
     over() {
         alert(`Game over. Score: ${this.score}`);
         this.score = 0;
+        this.fps = this.initialFps;
         p1.setDefaults();
     }
     updateScore() {
         const scoreElement: Element = document.querySelector(".score")!;
         scoreElement.textContent = this.score.toString();
+        if (this.score % 3 == 0) {
+            this.fps += 0.4;
+        }
+        console.log(this.fps);
     }
     drawGrid() {
         ctx!.strokeStyle = "#61234E";
